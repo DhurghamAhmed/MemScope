@@ -107,6 +107,64 @@ Project scope goes in `.mcp.json` at the project root; user scope goes through
 `claude mcp add --scope user`. To get the skill as well, copy
 `plugin/memscope/skills/memory-investigation/` into `.claude/skills/`.
 
+### Other MCP clients
+
+MemScope is a stdio server: the client starts `memscope.exe` as a child process
+on the same machine as the target. Any client that can launch a local stdio
+server can use it. The key name differs between them, which is the usual reason
+a copied block does nothing.
+
+**Cursor** — `%USERPROFILE%\.cursor\mcp.json` for every project, or
+`.cursor/mcp.json` for one. Top-level key `mcpServers`:
+
+```json
+{
+  "mcpServers": {
+    "memscope": {
+      "command": "C:\\tools\\memscope\\memscope.exe",
+      "args": ["serve"]
+    }
+  }
+}
+```
+
+**VS Code** — a workspace-root `.mcp.json` uses `mcpServers`, as above, and is
+the file to commit for a team. The VS Code-specific `.vscode/mcp.json` uses
+`servers` instead, with an explicit type:
+
+```json
+{
+  "servers": {
+    "memscope": {
+      "type": "stdio",
+      "command": "C:\\tools\\memscope\\memscope.exe",
+      "args": ["serve"]
+    }
+  }
+}
+```
+
+**Windsurf / Devin Desktop** — `%USERPROFILE%\.codeium\windsurf\mcp_config.json`,
+top-level `mcpServers`, same shape as Cursor.
+
+Restart the client after editing any of these. Client config paths move between
+releases, so check your client's current documentation if the server does not
+appear.
+
+### ChatGPT cannot run MemScope
+
+Not a packaging gap — an architectural one. ChatGPT's connectors and developer
+mode accept **remote** MCP servers only, reached over Streamable HTTP or SSE.
+They cannot start a local process on your machine.
+
+MemScope speaks stdio and has to run on the same Windows machine as the process
+it inspects. There is nothing to connect ChatGPT to. Exposing the server over
+HTTP would not fix it either: the useful work happens against local process
+handles, and tunnelling that to a hosted assistant would mean granting a remote
+service the right to read and write your processes' memory.
+
+Use a client that runs on your machine.
+
 ## 3. Confirm it runs
 
 ```
@@ -142,6 +200,21 @@ Pointer paths and module offsets, each re-resolved before it is reported.
 
 Needs both write gates (below). The agent captures the original bytes, writes,
 reads back, and reports `verified` with the before and after values.
+
+### The skill in clients that have no skill format
+
+`SKILL.md` is Anthropic's format, but its body is ordinary Markdown
+instructions and ports directly:
+
+| Client | Where the same text goes |
+|---|---|
+| Claude Code | The plugin, or `.claude/skills/memory-investigation/SKILL.md` |
+| Cursor | `.cursor/rules/memscope.mdc` |
+| VS Code Copilot | `.github/copilot-instructions.md` |
+| Anything reading `AGENTS.md` | Already in this repository's root |
+
+Drop the YAML frontmatter when the target format does not use it; keep the
+body.
 
 ### What the skill changes
 

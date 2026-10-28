@@ -21,6 +21,8 @@ Notable changes to MemScope. The format follows
   `gh attestation verify`.
 - An intended-use notice stating what the tool does not do and where the
   responsibility for authorization lies.
+- Setup for Cursor, VS Code and Windsurf, the skill's equivalents in clients
+  with no skill format, and why ChatGPT cannot run a local stdio server.
 
 ### Changed
 

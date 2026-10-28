@@ -10,9 +10,6 @@ observed from what was inferred.
 
 One command, no runtime to install first:
 
-```powershell
-irm https://raw.githubusercontent.com/DhurghamAhmed/MemScope/main/install.ps1 | iex
-```
 
 ## Contents
 
