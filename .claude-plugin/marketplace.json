@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "memscope",
+  "version": "1.0.0",
+  "description": "The MemScope MCP server for Windows process memory, with the investigation skill that drives it.",
+  "owner": {
+    "name": "Dhurgham Ahmed"
+  },
+  "plugins": [
+    {
+      "name": "memscope",
+      "description": "Inspect the memory of Windows processes over MCP: enumerate, read with provenance, scan and narrow, resolve pointer paths, and \u2014 behind two gates \u2014 write, undo and freeze.",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/DhurghamAhmed/MemScope.git",
+        "path": "plugin/memscope",
+        "ref": "main"
+      },
+      "category": "development"
+    }
+  ]
+}

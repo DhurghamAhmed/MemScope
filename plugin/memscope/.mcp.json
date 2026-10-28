@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "memscope": {
+      "command": "${MEMSCOPE_BIN}",
+      "args": [
+        "serve"
+      ],
+      "env": {
+        "MEMSCOPE_LOG": "info"
+      }
+    }
+  }
+}

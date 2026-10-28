@@ -1,0 +1,437 @@
+{
+  "tool": "memscope-bench",
+  "version": "0.1.0",
+  "recorded_at_unix_seconds": 1793077590,
+  "warmup_runs": 1,
+  "measured_runs": 5,
+  "unit_definition": "MB/s = mebibytes (1048576 bytes) of target memory examined per second",
+  "avx2_available": true,
+  "rayon_threads": 8,
+  "groups": [
+    {
+      "group": "comparison_kernels",
+      "workload_bytes": 134217728,
+      "planted_matches": 34,
+      "rayon_threads": 8,
+      "parallel_chunk_bytes": 4194304,
+      "avx2_available": true,
+      "measurements": [
+        {
+          "name": "int32 exact, scalar",
+          "unit": "MB/s",
+          "runs": 5,
+          "median": 11050.963937596589,
+          "min": 10866.243335936704,
+          "max": 11334.756081362297,
+          "samples": [
+            10866.243335936704,
+            11050.963937596589,
+            11334.756081362297,
+            11009.71090907527,
+            11298.038731089026
+          ]
+        },
+        {
+          "name": "int32 exact, avx2",
+          "unit": "MB/s",
+          "runs": 5,
+          "median": 51413.88174807198,
+          "min": 46934.58492226459,
+          "max": 57704.44504553241,
+          "samples": [
+            48976.46833747848,
+            46934.58492226459,
+            52144.864952947406,
+            51413.88174807198,
+            57704.44504553241
+          ]
+        },
+        {
+          "name": "int32 exact, avx2 + rayon",
+          "unit": "MB/s",
+          "runs": 5,
+          "median": 51777.840702236965,
+          "min": 50920.95317659228,
+          "max": 57819.13451983015,
+          "samples": [
+            50920.95317659228,
+            51777.840702236965,
+            51161.117550661496,
+            57819.13451983015,
+            57727.86722590538
+          ]
+        }
+      ],
+      "avx2_over_scalar": 4.65243412596401,
+      "rayon_over_avx2": 1.007079001658509
+    },
+    {
+      "group": "remote_scans",
+      "fixture_pid": 57552,
+      "bench_region_bytes": 134217728,
+      "expected_planted_matches": 34,
+      "cases": [
+        {
+          "case": "int32 exact",
+          "value_type": "int32",
+          "operator": "exact",
+          "matches": 34,
+          "bytes_visited": 134218109,
+          "measurements": [
+            {
+              "name": "int32 exact: end to end",
+              "unit": "MB/s",
+              "runs": 5,
+              "median": 2875.3206838282663,
+              "min": 2811.285596153701,
+              "max": 2899.5701252228937,
+              "samples": [
+                2872.094836075979,
+                2899.5701252228937,
+                2898.447372947929,
+                2811.285596153701,
+                2875.3206838282663
+              ]
+            },
+            {
+              "name": "int32 exact: remote capture",
+              "unit": "MB/s",
+              "runs": 5,
+              "median": 6263.474425030072,
+              "min": 6190.4707331776635,
+              "max": 6372.933201389821,
+              "samples": [
+                6190.4707331776635,
+                6263.474425030072,
+                6213.911517545248,
+                6372.933201389821,
+                6357.423430511302
+              ]
+            },
+            {
+              "name": "int32 exact: comparison",
+              "unit": "MB/s",
+              "runs": 5,
+              "median": 65809.95544982754,
+              "min": 64810.310556918754,
+              "max": 70953.63822057347,
+              "samples": [
+                65809.95544982754,
+                65040.835035525684,
+                67832.73097504745,
+                64810.310556918754,
+                70953.63822057347
+              ]
+            },
+            {
+              "name": "int32 exact: materialisation",
+              "unit": "ms",
+              "runs": 5,
+              "median": 0.023,
+              "min": 0.014,
+              "max": 0.031,
+              "samples": [
+                0.031,
+                0.023,
+                0.016,
+                0.03,
+                0.014
+              ]
+            },
+            {
+              "name": "int32 exact: total latency",
+              "unit": "ms",
+              "runs": 5,
+              "median": 44.456,
+              "min": 44.064,
+              "max": 45.449,
+              "samples": [
+                44.482,
+                44.064,
+                44.094,
+                45.449,
+                44.456
+              ]
+            }
+          ]
+        },
+        {
+          "case": "int32 greater_than",
+          "value_type": "int32",
+          "operator": "greater_than",
+          "matches": 1000000,
+          "bytes_visited": 8388632,
+          "measurements": [
+            {
+              "name": "int32 greater_than: end to end",
+              "unit": "MB/s",
+              "runs": 5,
+              "median": 453.1794918843485,
+              "min": 442.53543803601093,
+              "max": 473.19493731270967,
+              "samples": [
+                473.19493731270967,
+                465.45316903951647,
+                442.53543803601093,
+                453.1794918843485,
+                449.45968853564165
+              ]
+            },
+            {
+              "name": "int32 greater_than: remote capture",
+              "unit": "MB/s",
+              "runs": 5,
+              "median": 6240.267463481743,
+              "min": 5602.256924498315,
+              "max": 6980.822764558109,
+              "samples": [
+                6980.822764558109,
+                6578.966190940455,
+                5826.673625771007,
+                5602.256924498315,
+                6240.267463481743
+              ]
+            },
+            {
+              "name": "int32 greater_than: comparison",
+              "unit": "MB/s",
+              "runs": 5,
+              "median": 641.130220242314,
+              "min": 620.7342402377091,
+              "max": 652.8499174297041,
+              "samples": [
+                652.5304150231316,
+                652.8499174297041,
+                620.7342402377091,
+                641.130220242314,
+                624.7089558163044
+              ]
+            },
+            {
+              "name": "int32 greater_than: materialisation",
+              "unit": "ms",
+              "runs": 5,
+              "median": 0.046,
+              "min": 0.037,
+              "max": 0.066,
+              "samples": [
+                0.065,
+                0.046,
+                0.037,
+                0.066,
+                0.039
+              ]
+            },
+            {
+              "name": "int32 greater_than: total latency",
+              "unit": "ms",
+              "runs": 5,
+              "median": 17.596,
+              "min": 16.833,
+              "max": 17.99,
+              "samples": [
+                16.833,
+                17.122,
+                17.99,
+                17.596,
+                17.692
+              ]
+            }
+          ]
+        },
+        {
+          "case": "float exact",
+          "value_type": "float",
+          "operator": "exact",
+          "matches": 0,
+          "bytes_visited": 134218109,
+          "measurements": [
+            {
+              "name": "float exact: end to end",
+              "unit": "MB/s",
+              "runs": 5,
+              "median": 953.1417723614583,
+              "min": 920.2687417942785,
+              "max": 955.6124028425995,
+              "samples": [
+                920.2687417942785,
+                927.1075582947249,
+                955.6088356978206,
+                955.6124028425995,
+                953.1417723614583
+              ]
+            },
+            {
+              "name": "float exact: remote capture",
+              "unit": "MB/s",
+              "runs": 5,
+              "median": 6142.936284009912,
+              "min": 5990.282822440778,
+              "max": 6330.697034962884,
+              "samples": [
+                5990.282822440778,
+                6124.712347476652,
+                6330.697034962884,
+                6142.936284009912,
+                6289.635071982436
+              ]
+            },
+            {
+              "name": "float exact: comparison",
+              "unit": "MB/s",
+              "runs": 5,
+              "median": 1407.8195724850646,
+              "min": 1364.9004409246593,
+              "max": 1420.789683208251,
+              "samples": [
+                1364.9004409246593,
+                1389.2244605907938,
+                1407.8195724850646,
+                1420.789683208251,
+                1416.0115421197472
+              ]
+            },
+            {
+              "name": "float exact: materialisation",
+              "unit": "ms",
+              "runs": 5,
+              "median": 0.004,
+              "min": 0.002,
+              "max": 0.005,
+              "samples": [
+                0.002,
+                0.005,
+                0.005,
+                0.004,
+                0.004
+              ]
+            },
+            {
+              "name": "float exact: total latency",
+              "unit": "ms",
+              "runs": 5,
+              "median": 134.19,
+              "min": 133.85,
+              "max": 139.002,
+              "samples": [
+                139.002,
+                137.967,
+                133.852,
+                133.85,
+                134.19
+              ]
+            }
+          ]
+        },
+        {
+          "case": "double between",
+          "value_type": "double",
+          "operator": "between",
+          "matches": 1000000,
+          "bytes_visited": 32506073,
+          "measurements": [
+            {
+              "name": "double between: end to end",
+              "unit": "MB/s",
+              "runs": 5,
+              "median": 663.7889881852058,
+              "min": 659.0474265927403,
+              "max": 665.4932656250692,
+              "samples": [
+                665.4932656250692,
+                664.9950436175202,
+                662.534904613278,
+                663.7889881852058,
+                659.0474265927403
+              ]
+            },
+            {
+              "name": "double between: remote capture",
+              "unit": "MB/s",
+              "runs": 5,
+              "median": 6158.165861606408,
+              "min": 6104.806409477484,
+              "max": 6516.755717327446,
+              "samples": [
+                6106.008853127174,
+                6269.0003937971005,
+                6104.806409477484,
+                6516.755717327446,
+                6158.165861606408
+              ]
+            },
+            {
+              "name": "double between: comparison",
+              "unit": "MB/s",
+              "runs": 5,
+              "median": 906.7304380744292,
+              "min": 892.5032229897697,
+              "max": 908.4043529076558,
+              "samples": [
+                908.4043529076558,
+                902.7433589786447,
+                906.7304380744292,
+                907.2877238154607,
+                892.5032229897697
+              ]
+            },
+            {
+              "name": "double between: materialisation",
+              "unit": "ms",
+              "runs": 5,
+              "median": 0.107,
+              "min": 0.076,
+              "max": 0.13,
+              "samples": [
+                0.13,
+                0.076,
+                0.11,
+                0.097,
+                0.107
+              ]
+            },
+            {
+              "name": "double between: total latency",
+              "unit": "ms",
+              "runs": 5,
+              "median": 46.595,
+              "min": 46.51,
+              "max": 46.964,
+              "samples": [
+                46.51,
+                46.529,
+                46.712,
+                46.595,
+                46.964
+              ]
+            }
+          ]
+        }
+      ],
+      "peak_working_set_bytes": 140791808
+    },
+    {
+      "group": "pointer_index",
+      "bench_region_bytes": 134217728,
+      "index_entries": 16777216,
+      "index_bytes": 268435456,
+      "measurements": [
+        {
+          "name": "pointer index build",
+          "unit": "MB/s",
+          "runs": 5,
+          "median": 31.16643957110084,
+          "min": 28.706223090385496,
+          "max": 32.33584999308252,
+          "samples": [
+            28.706223090385496,
+            31.16643957110084,
+            32.33584999308252,
+            31.93238756293315,
+            30.577911001780027
+          ]
+        }
+      ]
+    }
+  ]
+}

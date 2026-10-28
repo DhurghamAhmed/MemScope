@@ -1,0 +1,7 @@
+LIBRARY memscope_anchor
+EXPORTS
+    g_anchor_root DATA
+    g_anchor_guard_before DATA
+    g_anchor_guard_after DATA
+    anchor_set_root
+    anchor_root_address

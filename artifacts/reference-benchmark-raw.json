@@ -1,0 +1,115 @@
+{
+  "tool": "reference-benchmark.py",
+  "reference_path": "<redacted local checkout of mcp-memory-mac>",
+  "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+  "numpy_backend": {
+    "vectorized": true,
+    "backend": "numpy 2.5.4",
+    "note": "\u0627\u0644\u0645\u0642\u0627\u0631\u0646\u0627\u062a \u0627\u0644\u0639\u0634\u0631\u064a\u0629 \u0648\u0627\u0644\u0645\u062f\u0649 \u0645\u064f\u062a\u062c\u0647\u0629\u061b \u0648\u0627\u0644\u0645\u0642\u0627\u0631\u0646\u0629 \u0627\u0644\u062f\u0642\u064a\u0642\u0629 \u0644\u0644\u0623\u0639\u062f\u0627\u062f bytes.find."
+  },
+  "vectorised": true,
+  "workload_bytes": 134217728,
+  "planted_matches": 34,
+  "warmup_runs": 1,
+  "measured_runs": 5,
+  "unit_definition": "MB/s = mebibytes (1048576 bytes) of the buffer examined per second",
+  "note": "These numbers measure the reference comparison functions over an in-process buffer, with no remote reads. They are comparable to the MemScope comparison-kernel figures, not to its end-to-end remote scan figures.",
+  "measurements": [
+    {
+      "name": "int32 exact (bytes.find fast path)",
+      "unit": "MB/s",
+      "runs": 5,
+      "median": 3684.121150210563,
+      "min": 3627.387912342793,
+      "max": 3723.278928974603,
+      "samples": [
+        3645.165883275769,
+        3684.121150210563,
+        3627.387912342793,
+        3706.9322529114233,
+        3723.278928974603
+      ],
+      "matches": 34
+    },
+    {
+      "name": "int32 exact (numpy)",
+      "unit": "MB/s",
+      "runs": 5,
+      "median": 14406.464903523698,
+      "min": 13816.329174541677,
+      "max": 14734.830605968233,
+      "samples": [
+        14183.296950541531,
+        14406.464903523698,
+        13816.329174541677,
+        14734.830605968233,
+        14498.334958313271
+      ],
+      "matches": 34
+    },
+    {
+      "name": "int32 greater_than (numpy)",
+      "unit": "MB/s",
+      "runs": 5,
+      "median": 349.8301957025689,
+      "min": 345.26642429383685,
+      "max": 363.94240611360215,
+      "samples": [
+        349.8301957025689,
+        348.4198208412579,
+        345.26642429383685,
+        363.94240611360215,
+        360.868237702142
+      ],
+      "matches": 16774506
+    },
+    {
+      "name": "float exact (numpy)",
+      "unit": "MB/s",
+      "runs": 5,
+      "median": 443.4631282926615,
+      "min": 434.6476671305617,
+      "max": 447.97144181987943,
+      "samples": [
+        447.97144181987943,
+        442.3905541279975,
+        446.2763468671022,
+        443.4631282926615,
+        434.6476671305617
+      ],
+      "matches": 3
+    },
+    {
+      "name": "double between (numpy)",
+      "unit": "MB/s",
+      "runs": 5,
+      "median": 1224.3414381916327,
+      "min": 1179.9138109854148,
+      "max": 1247.8953951948267,
+      "samples": [
+        1224.3414381916327,
+        1232.9719826410565,
+        1247.8953951948267,
+        1179.9138109854148,
+        1213.3863052180009
+      ],
+      "matches": 4187769
+    },
+    {
+      "name": "int32 greater_than (pure python loop, 8 MiB)",
+      "unit": "MB/s",
+      "runs": 5,
+      "median": 45.077838157663464,
+      "min": 27.370620786139767,
+      "max": 45.298599876865005,
+      "samples": [
+        44.56990873796653,
+        45.298599876865005,
+        45.209821607778395,
+        27.370620786139767,
+        45.077838157663464
+      ],
+      "matches": 1048364
+    }
+  ]
+}

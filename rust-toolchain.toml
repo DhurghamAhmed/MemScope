@@ -1,0 +1,7 @@
+# Pinned so that a rebuild on this host, or a later one, uses the toolchain the
+# recorded measurements and acceptance runs were produced with.
+[toolchain]
+channel = "1.99.1"
+components = ["rustfmt", "clippy"]
+targets = ["x86_64-pc-windows-msvc"]
+profile = "minimal"

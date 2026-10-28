@@ -1,0 +1,85 @@
+name: Bug report
+description: Something the server did that it should not have done
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A memory bug is unreproducible without the context below. Please fill it in.
+        Do not paste memory contents, full SIDs, or hostnames.
+
+  - type: input
+    id: version
+    attributes:
+      label: MemScope version
+      description: From `server_status`, or the release you downloaded.
+    validations:
+      required: true
+
+  - type: input
+    id: windows
+    attributes:
+      label: Windows build
+      description: "`winver`, for example: Windows 11 Pro 10.0.26200"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: target_arch
+    attributes:
+      label: Target process architecture
+      options: ["x64", "x86 (WOW64)", "unknown", "not applicable"]
+    validations:
+      required: true
+
+  - type: input
+    id: tool
+    attributes:
+      label: Tool
+      description: "Which of the 27 tools, for example: first_scan"
+    validations:
+      required: true
+
+  - type: textarea
+    id: arguments
+    attributes:
+      label: Arguments
+      description: The JSON you sent, with addresses redacted if you prefer.
+      render: json
+    validations:
+      required: true
+
+  - type: textarea
+    id: response
+    attributes:
+      label: What came back
+      description: >
+        The full error object if there was one — `code`, `operation`, the Win32
+        code and the next step. Or the output that was wrong.
+      render: json
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected instead
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: gates
+    attributes:
+      label: Write gates, if this involves a mutation
+      options:
+        - label: "`MEMSCOPE_ALLOW_WRITE` was set to exactly `1`"
+        - label: "`confirm: true` was sent on the call"
+
+  - type: checkboxes
+    id: elevation
+    attributes:
+      label: Context
+      options:
+        - label: The client ran elevated
+        - label: The target runs as a different user
+        - label: Reproducible with the fixture in `fixtures/`

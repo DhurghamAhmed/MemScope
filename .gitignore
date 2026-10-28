@@ -1,0 +1,19 @@
+/target/
+# Fixture build output. Sources in fixtures/ are tracked; binaries are rebuilt.
+/fixtures/bin/
+# Raw benchmark and acceptance logs are written here before being curated into
+# docs/; the curated artifacts are tracked, the scratch output is not.
+/artifacts/scratch/
+*.pdb
+
+# Local Claude Code overrides, per machine.
+/.claude/settings.local.json
+
+# How the project was built. Kept locally, never published.
+/memscope-rust-prompt.md
+/PROJECT_PROGRESS.md
+/docs/environment.md
+/docs/claude-code-setup.md
+/docs/final-report.md
+/docs/acceptance-matrix.md
+/.claude/

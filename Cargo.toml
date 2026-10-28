@@ -1,0 +1,74 @@
+[package]
+name = "memscope"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.99"
+description = "Local MCP server for Windows process memory analysis"
+license = "MIT"
+publish = false
+
+[[bin]]
+name = "memscope"
+path = "src/main.rs"
+
+[lib]
+name = "memscope"
+path = "src/lib.rs"
+
+[dependencies]
+# Win32 surface. Features are listed explicitly so that an added API call is a
+# visible dependency change rather than an invisible one.
+windows = { version = "0.62.2", features = [
+    "Win32_Foundation",
+    "Win32_Security",
+    "Win32_Security_Authorization",
+    "Win32_Storage_FileSystem",
+    "Win32_System_Diagnostics_Debug",
+    "Win32_System_Diagnostics_ToolHelp",
+    "Win32_System_Memory",
+    "Win32_System_ProcessStatus",
+    "Win32_System_SystemInformation",
+    "Win32_System_Threading",
+    "Win32_System_WindowsProgramming",
+] }
+
+# MCP SDK. `server` brings schemars + macros; `transport-io` is the stdio
+# transport required by the original specification.
+rmcp = { version = "3.8.0", features = ["server", "transport-io", "macros"] }
+tokio = { version = "1.54.1", features = [
+    "rt-multi-thread",
+    "macros",
+    "io-std",
+    "sync",
+    "time",
+] }
+
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = { version = "1.0.154", features = ["preserve_order"] }
+schemars = "1.2.3"
+# Re-exported by rmcp for request cancellation tokens; named here because this
+# crate uses CancellationToken directly in the MCP layer.
+tokio-util = "0.7.20"
+
+rayon = "1.12.0"
+memchr = "2.8.3"
+sha2 = "0.11.1"
+thiserror = "2.0.21"
+
+[dev-dependencies]
+tempfile = "3.24.0"
+# The end-to-end Phase 9 test drives the server with the SDK's own client over a
+# real child-process stdio transport, so the workflow is proven against an actual
+# MCP client rather than a hand-rolled framing of JSON-RPC.
+rmcp = { version = "3.8.0", features = [
+    "client",
+    "transport-child-process",
+    "transport-io",
+] }
+
+[profile.release]
+opt-level = 3
+lto = "fat"
+codegen-units = 1
+panic = "abort"
+strip = "symbols"

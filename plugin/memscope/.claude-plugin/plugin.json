@@ -1,0 +1,17 @@
+{
+  "name": "memscope",
+  "version": "0.1.0",
+  "description": "Inspect the memory of Windows processes over MCP: enumerate, read with provenance, scan and narrow, resolve pointer paths, and \u2014 behind two gates \u2014 write, undo and freeze.",
+  "author": {
+    "name": "Dhurgham Ahmed"
+  },
+  "homepage": "https://github.com/DhurghamAhmed/MemScope",
+  "license": "MIT",
+  "keywords": [
+    "mcp",
+    "windows",
+    "memory",
+    "debugging",
+    "reverse-engineering"
+  ]
+}

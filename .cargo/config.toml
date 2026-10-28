@@ -1,0 +1,6 @@
+# the original specification asks for a static CRT "where practical" so that the
+# distributed executable needs no separately installed runtime. This links the
+# MSVC CRT statically; it does NOT make the binary independent of Windows system
+# DLLs, and docs must not claim that. Verified in Phase 10 (P10-07).
+[target.x86_64-pc-windows-msvc]
+rustflags = ["-C", "target-feature=+crt-static"]
